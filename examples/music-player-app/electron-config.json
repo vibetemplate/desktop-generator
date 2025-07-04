@@ -1,0 +1,283 @@
+{
+  "app": {
+    "name": "MusicPlayer",
+    "displayName": "音悦播放器",
+    "version": "2.1.0",
+    "description": "现代化音乐播放器，支持多种音频格式、播放列表管理、音效均衡器等专业功能",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/music-player",
+    "license": "MIT",
+    "keywords": [
+      "music-player",
+      "audio",
+      "multimedia",
+      "entertainment",
+      "electron"
+    ],
+    "category": "entertainment"
+  },
+  "window": {
+    "width": 1000,
+    "height": 650,
+    "minWidth": 800,
+    "minHeight": 500,
+    "maxWidth": 1600,
+    "maxHeight": 1200,
+    "resizable": true,
+    "minimizable": true,
+    "maximizable": true,
+    "closable": true,
+    "alwaysOnTop": false,
+    "fullscreen": false,
+    "titleBarStyle": "hidden",
+    "frame": false,
+    "transparent": false,
+    "backgroundColor": "#1a1a1a",
+    "show": true,
+    "center": true,
+    "icon": "assets/icon.png",
+    "title": "音悦播放器"
+  },
+  "frontend": {
+    "framework": "vue",
+    "language": "typescript",
+    "bundler": "vite",
+    "styling": "scss",
+    "uiLibrary": "element-plus",
+    "stateManagement": "pinia",
+    "routing": "vue-router"
+  },
+  "features": {
+    "menu": {
+      "enabled": true,
+      "type": "application",
+      "customMenu": true
+    },
+    "tray": {
+      "enabled": true,
+      "icon": "assets/tray-icon.png",
+      "tooltip": "音悦播放器 - 后台播放中"
+    },
+    "autoUpdater": {
+      "enabled": true,
+      "provider": "github",
+      "publisherName": "VibeTemplate"
+    },
+    "fileAssociation": {
+      "enabled": true,
+      "extensions": [
+        "mp3",
+        "flac",
+        "wav",
+        "ogg",
+        "aac",
+        "m4a",
+        "wma",
+        "ape",
+        "opus"
+      ],
+      "name": "音频文件",
+      "description": "音悦播放器支持的音频格式"
+    },
+    "protocolHandling": {
+      "enabled": true,
+      "schemes": [
+        "musicplayer"
+      ]
+    },
+    "notifications": {
+      "enabled": true,
+      "sound": false
+    },
+    "clipboard": {
+      "enabled": true,
+      "watchChanges": false
+    },
+    "globalShortcuts": {
+      "enabled": true,
+      "shortcuts": [
+        {
+          "accelerator": "MediaPlayPause",
+          "action": "togglePlay"
+        },
+        {
+          "accelerator": "MediaNextTrack",
+          "action": "nextTrack"
+        },
+        {
+          "accelerator": "MediaPreviousTrack",
+          "action": "previousTrack"
+        },
+        {
+          "accelerator": "CmdOrCtrl+Shift+M",
+          "action": "toggleMute"
+        },
+        {
+          "accelerator": "CmdOrCtrl+Up",
+          "action": "volumeUp"
+        },
+        {
+          "accelerator": "CmdOrCtrl+Down",
+          "action": "volumeDown"
+        }
+      ]
+    },
+    "powerMonitor": {
+      "enabled": true,
+      "events": [
+        "suspend",
+        "resume"
+      ]
+    },
+    "systemIdle": {
+      "enabled": true,
+      "threshold": 300
+    },
+    "crashReporter": {
+      "enabled": true,
+      "submitURL": "https://api.musicplayer.com/crash-reports"
+    }
+  },
+  "build": {
+    "appId": "com.vibetemplate.musicplayer",
+    "productName": "MusicPlayer",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      "assets/**/*",
+      "codecs/**/*"
+    ],
+    "asar": true,
+    "compression": "maximum",
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "音悦播放器"
+    },
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "assets/icon.png",
+      "category": "AudioVideo",
+      "desktop": {
+        "Name": "音悦播放器",
+        "Comment": "现代化音乐播放器",
+        "Icon": "musicplayer",
+        "Type": "Application",
+        "Terminal": false,
+        "MimeType": "audio/mpeg;audio/flac;audio/wav;audio/ogg;"
+      }
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "vibetemplate",
+      "repo": "music-player",
+      "private": false,
+      "releaseType": "release"
+    }
+  },
+  "security": {
+    "nodeIntegration": false,
+    "contextIsolation": true,
+    "enableRemoteModule": false,
+    "webSecurity": true,
+    "allowRunningInsecureContent": false,
+    "experimentalFeatures": false,
+    "navigateOnDragDrop": false,
+    "preload": "src/preload.ts",
+    "sandbox": false,
+    "csp": {
+      "enabled": true,
+      "policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src 'self' data: blob:;"
+    },
+    "permissions": {
+      "camera": false,
+      "microphone": false,
+      "geolocation": false,
+      "notifications": true,
+      "persistentStorage": true,
+      "fullscreen": true,
+      "openExternal": true,
+      "media": true
+    }
+  },
+  "development": {
+    "devTools": true,
+    "hotReload": true,
+    "devServerPort": 3100,
+    "electronPort": 3101,
+    "inspectPort": 5859
+  },
+  "database": {
+    "enabled": true,
+    "type": "sqlite",
+    "path": "data/music.db",
+    "migrations": true,
+    "backup": true
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "console": true,
+    "file": true,
+    "path": "logs/player.log",
+    "maxFiles": 7,
+    "maxSize": "10MB"
+  },
+  "analytics": {
+    "enabled": false
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh-CN",
+    "supportedLocales": [
+      "zh-CN",
+      "en-US",
+      "ja-JP",
+      "ko-KR"
+    ],
+    "fallbackLocale": "en-US",
+    "loadPath": "locales/{{lng}}/{{ns}}.json"
+  },
+  "plugins": {
+    "enabled": true,
+    "directory": "plugins",
+    "autoLoad": true,
+    "sandboxed": true
+  },
+  "themes": {
+    "enabled": true,
+    "defaultTheme": "dark",
+    "supportedThemes": [
+      "light",
+      "dark",
+      "auto"
+    ],
+    "customThemes": true,
+    "themeDirectory": "themes"
+  }
+}

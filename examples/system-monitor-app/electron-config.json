@@ -1,0 +1,273 @@
+{
+  "app": {
+    "name": "SystemMonitor",
+    "displayName": "系统监控大师",
+    "version": "3.2.1",
+    "description": "专业的系统性能监控工具，实时监控CPU、内存、网络、磁盘等系统资源使用情况",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/system-monitor",
+    "license": "MIT",
+    "keywords": [
+      "system-monitor",
+      "performance",
+      "cpu",
+      "memory",
+      "network",
+      "utilities"
+    ],
+    "category": "utilities"
+  },
+  "window": {
+    "width": 1400,
+    "height": 900,
+    "minWidth": 1000,
+    "minHeight": 600,
+    "maxWidth": 2560,
+    "maxHeight": 1440,
+    "resizable": true,
+    "minimizable": true,
+    "maximizable": true,
+    "closable": true,
+    "alwaysOnTop": false,
+    "fullscreen": false,
+    "titleBarStyle": "default",
+    "frame": true,
+    "transparent": false,
+    "backgroundColor": "#f5f5f5",
+    "show": true,
+    "center": true,
+    "icon": "assets/icon.png",
+    "title": "系统监控大师"
+  },
+  "frontend": {
+    "framework": "react",
+    "language": "typescript",
+    "bundler": "webpack",
+    "styling": "scss",
+    "uiLibrary": "antd",
+    "stateManagement": "zustand",
+    "routing": "react-router"
+  },
+  "features": {
+    "menu": {
+      "enabled": true,
+      "type": "application",
+      "customMenu": true
+    },
+    "tray": {
+      "enabled": true,
+      "icon": "assets/tray-icon.png",
+      "tooltip": "系统监控大师 - 后台监控中"
+    },
+    "autoUpdater": {
+      "enabled": true,
+      "provider": "github",
+      "publisherName": "VibeTemplate"
+    },
+    "fileAssociation": {
+      "enabled": true,
+      "extensions": [
+        "syslog",
+        "perf",
+        "mon"
+      ],
+      "name": "监控数据文件",
+      "description": "系统监控数据和配置文件"
+    },
+    "protocolHandling": {
+      "enabled": true,
+      "schemes": [
+        "sysmonitor"
+      ]
+    },
+    "notifications": {
+      "enabled": true,
+      "sound": true
+    },
+    "clipboard": {
+      "enabled": true,
+      "watchChanges": false
+    },
+    "globalShortcuts": {
+      "enabled": true,
+      "shortcuts": [
+        {
+          "accelerator": "CmdOrCtrl+Shift+M",
+          "action": "showMainWindow"
+        },
+        {
+          "accelerator": "CmdOrCtrl+Shift+T",
+          "action": "toggleAlwaysOnTop"
+        },
+        {
+          "accelerator": "F5",
+          "action": "refreshData"
+        }
+      ]
+    },
+    "powerMonitor": {
+      "enabled": true,
+      "events": [
+        "suspend",
+        "resume",
+        "shutdown",
+        "lock-screen",
+        "unlock-screen"
+      ]
+    },
+    "systemIdle": {
+      "enabled": true,
+      "threshold": 120
+    },
+    "crashReporter": {
+      "enabled": true,
+      "submitURL": "https://api.systemmonitor.com/crash-reports"
+    }
+  },
+  "build": {
+    "appId": "com.vibetemplate.systemmonitor",
+    "productName": "SystemMonitor",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "native/**/*"
+    ],
+    "extraResources": [
+      "assets/**/*",
+      "scripts/**/*"
+    ],
+    "asar": true,
+    "compression": "normal",
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "系统监控大师"
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "assets/icon.png",
+      "category": "System",
+      "desktop": {
+        "Name": "系统监控大师",
+        "Comment": "专业的系统性能监控工具",
+        "Icon": "systemmonitor",
+        "Type": "Application",
+        "Terminal": false,
+        "MimeType": "application/x-syslog;"
+      }
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "vibetemplate",
+      "repo": "system-monitor",
+      "private": false,
+      "releaseType": "release"
+    }
+  },
+  "security": {
+    "nodeIntegration": false,
+    "contextIsolation": true,
+    "enableRemoteModule": false,
+    "webSecurity": true,
+    "allowRunningInsecureContent": false,
+    "experimentalFeatures": false,
+    "navigateOnDragDrop": false,
+    "preload": "src/preload.ts",
+    "sandbox": false,
+    "csp": {
+      "enabled": true,
+      "policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+    },
+    "permissions": {
+      "camera": false,
+      "microphone": false,
+      "geolocation": false,
+      "notifications": true,
+      "persistentStorage": true,
+      "fullscreen": true,
+      "openExternal": true,
+      "media": false
+    }
+  },
+  "development": {
+    "devTools": true,
+    "hotReload": true,
+    "devServerPort": 3200,
+    "electronPort": 3201,
+    "inspectPort": 5860
+  },
+  "database": {
+    "enabled": true,
+    "type": "sqlite",
+    "path": "data/monitor.db",
+    "migrations": true,
+    "backup": true
+  },
+  "logging": {
+    "enabled": true,
+    "level": "debug",
+    "console": true,
+    "file": true,
+    "path": "logs/monitor.log",
+    "maxFiles": 10,
+    "maxSize": "20MB"
+  },
+  "analytics": {
+    "enabled": false
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh-CN",
+    "supportedLocales": [
+      "zh-CN",
+      "en-US",
+      "ja-JP",
+      "de-DE",
+      "fr-FR"
+    ],
+    "fallbackLocale": "en-US",
+    "loadPath": "locales/{{lng}}/{{ns}}.json"
+  },
+  "plugins": {
+    "enabled": true,
+    "directory": "plugins",
+    "autoLoad": true,
+    "sandboxed": true
+  },
+  "themes": {
+    "enabled": true,
+    "defaultTheme": "auto",
+    "supportedThemes": [
+      "light",
+      "dark",
+      "auto"
+    ],
+    "customThemes": false,
+    "themeDirectory": "themes"
+  }
+}

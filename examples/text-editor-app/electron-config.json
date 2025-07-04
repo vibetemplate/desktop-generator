@@ -1,0 +1,254 @@
+{
+  "app": {
+    "name": "TextEditor",
+    "displayName": "简易文本编辑器",
+    "version": "1.0.0",
+    "description": "功能强大的跨平台文本编辑器，支持语法高亮、多标签页、文件管理等特性",
+    "author": "VibeTemplate",
+    "homepage": "https://github.com/vibetemplate/text-editor",
+    "license": "MIT",
+    "keywords": [
+      "text-editor",
+      "code-editor",
+      "markdown",
+      "productivity",
+      "electron"
+    ],
+    "category": "productivity"
+  },
+  "window": {
+    "width": 1200,
+    "height": 800,
+    "minWidth": 800,
+    "minHeight": 600,
+    "resizable": true,
+    "minimizable": true,
+    "maximizable": true,
+    "closable": true,
+    "alwaysOnTop": false,
+    "fullscreen": false,
+    "titleBarStyle": "default",
+    "frame": true,
+    "transparent": false,
+    "backgroundColor": "#ffffff",
+    "show": true,
+    "center": true,
+    "icon": "assets/icon.png",
+    "title": "简易文本编辑器"
+  },
+  "frontend": {
+    "framework": "react",
+    "language": "typescript",
+    "bundler": "webpack",
+    "styling": "scss",
+    "uiLibrary": "antd",
+    "stateManagement": "zustand",
+    "routing": "none"
+  },
+  "features": {
+    "menu": {
+      "enabled": true,
+      "type": "application",
+      "customMenu": true
+    },
+    "tray": {
+      "enabled": false
+    },
+    "autoUpdater": {
+      "enabled": true,
+      "provider": "github",
+      "publisherName": "VibeTemplate"
+    },
+    "fileAssociation": {
+      "enabled": true,
+      "extensions": [
+        "txt",
+        "md",
+        "js",
+        "ts",
+        "json",
+        "html",
+        "css",
+        "scss",
+        "xml",
+        "yaml",
+        "yml"
+      ],
+      "name": "文本文档",
+      "description": "简易编辑器支持的文本文档格式"
+    },
+    "protocolHandling": {
+      "enabled": false
+    },
+    "notifications": {
+      "enabled": true,
+      "sound": false
+    },
+    "clipboard": {
+      "enabled": true,
+      "watchChanges": false
+    },
+    "globalShortcuts": {
+      "enabled": true,
+      "shortcuts": [
+        {
+          "accelerator": "CmdOrCtrl+Shift+N",
+          "action": "newWindow"
+        },
+        {
+          "accelerator": "CmdOrCtrl+Shift+D",
+          "action": "toggleDevTools"
+        }
+      ]
+    },
+    "powerMonitor": {
+      "enabled": false
+    },
+    "systemIdle": {
+      "enabled": false
+    },
+    "crashReporter": {
+      "enabled": true,
+      "submitURL": "https://api.texteditor.com/crash-reports"
+    }
+  },
+  "build": {
+    "appId": "com.vibetemplate.texteditor",
+    "productName": "TextEditor",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      "assets/**/*"
+    ],
+    "asar": true,
+    "compression": "normal",
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "简易文本编辑器"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon.png",
+      "category": "Office",
+      "desktop": {
+        "Name": "简易文本编辑器",
+        "Comment": "功能强大的跨平台文本编辑器",
+        "Icon": "texteditor",
+        "Type": "Application",
+        "Terminal": false,
+        "MimeType": "text/plain;text/markdown;application/json;"
+      }
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "vibetemplate",
+      "repo": "text-editor",
+      "private": false,
+      "releaseType": "release"
+    }
+  },
+  "security": {
+    "nodeIntegration": false,
+    "contextIsolation": true,
+    "enableRemoteModule": false,
+    "webSecurity": true,
+    "allowRunningInsecureContent": false,
+    "experimentalFeatures": false,
+    "navigateOnDragDrop": false,
+    "preload": "src/preload.ts",
+    "sandbox": false,
+    "csp": {
+      "enabled": true,
+      "policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    },
+    "permissions": {
+      "camera": false,
+      "microphone": false,
+      "geolocation": false,
+      "notifications": true,
+      "persistentStorage": true,
+      "fullscreen": true,
+      "openExternal": true,
+      "media": false
+    }
+  },
+  "development": {
+    "devTools": true,
+    "hotReload": true,
+    "devServerPort": 3000,
+    "electronPort": 3001,
+    "inspectPort": 5858
+  },
+  "database": {
+    "enabled": true,
+    "type": "sqlite",
+    "path": "data/editor.db",
+    "migrations": true,
+    "backup": true
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "console": true,
+    "file": true,
+    "path": "logs/app.log",
+    "maxFiles": 5,
+    "maxSize": "5MB"
+  },
+  "analytics": {
+    "enabled": false
+  },
+  "localization": {
+    "enabled": true,
+    "defaultLocale": "zh-CN",
+    "supportedLocales": [
+      "zh-CN",
+      "en-US",
+      "ja-JP"
+    ],
+    "fallbackLocale": "en-US",
+    "loadPath": "locales/{{lng}}/{{ns}}.json"
+  },
+  "plugins": {
+    "enabled": true,
+    "directory": "plugins",
+    "autoLoad": true,
+    "sandboxed": true
+  },
+  "themes": {
+    "enabled": true,
+    "defaultTheme": "light",
+    "supportedThemes": [
+      "light",
+      "dark",
+      "auto"
+    ],
+    "customThemes": true,
+    "themeDirectory": "themes"
+  }
+}
